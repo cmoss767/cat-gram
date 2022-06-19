@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Card</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/style.css" />
-  </head>
+    <title>Catgram</title>
 
+    <link rel="stylesheet" href="/public/css/style.css" type="text/css" />
+  </head>
   <body>
     <div id="card">
       <div id="card-content">
@@ -16,14 +16,24 @@
           <div class="underline-title"></div>
           <p>A social network for cat owners.</p>
         </div>
-        <form method="post" class="form">
+        <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => {
+        %>
+        <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %> <% } %> <% if (locals.messages.info) { %> <%
+        messages.info.forEach( el => { %>
+        <div class="alert alert-info"><%= el.msg %></div>
+        <% }) %> <% } %>
+        <form action="/login" method="POST" class="form">
           <label for="user-email" style="padding-top: 13px">
             &nbsp;Email
           </label>
+
           <input
+            type="email"
             id="user-email"
             class="form-content"
-            type="email"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
             name="email"
             autocomplete="on"
             required
@@ -37,16 +47,19 @@
             class="form-content"
             type="password"
             name="password"
+            id="exampleInputPassword1"
             required
           />
+
           <div class="form-border"></div>
           <a href="#">
             <legend id="forgot-pass">Forgot password?</legend>
           </a>
           <input id="submit-btn" type="submit" name="submit" value="LOGIN" />
-          <a href="#" id="signup">Don't have account yet?</a>
+          <a href="/signup" id="signup">Don't have account yet?</a>
         </form>
       </div>
     </div>
+    <script type="text/javascript" src="/js/index.js"></script>
   </body>
 </html>
