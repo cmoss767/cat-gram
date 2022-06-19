@@ -18,6 +18,22 @@ module.exports = {
       console.log(err);
     }
   },
+  getCreate: async (req, res) => {
+    try {
+      const posts = await Post.find({ user: req.user.id });
+      res.render("create.ejs", { posts: posts, user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getMyPosts: async (req, res) => {
+    try {
+      const posts = await Post.find({ user: req.user.id });
+      res.render("myPosts.ejs", { posts: posts, user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
